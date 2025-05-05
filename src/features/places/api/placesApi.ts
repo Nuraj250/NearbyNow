@@ -1,29 +1,39 @@
-import { Place } from "../types/place";
+import axios from 'axios';
+import { Place } from '../types/place';
 
-// Mock data for now (later you can replace with real API call)
-export const places: Place[] = [
-  {
-    id: 1,
-    name: "Coffee House",
-    category: "Cafe",
-    lat: 51.505,
-    lng: -0.09,
-    distance: 500,
-  },
-  {
-    id: 2,
-    name: "Central Park",
-    category: "Park",
-    lat: 51.507,
-    lng: -0.087,
-    distance: 800,
-  },
-  {
-    id: 3,
-    name: "Bookstore",
-    category: "Shopping",
-    lat: 51.508,
-    lng: -0.091,
-    distance: 300,
-  },
-];
+export async function fetchNearbyPlaces(lat: number, lng: number): Promise<Place[]> {
+  const radius = 1000; // radius in meters (1 km)
+
+  const overpassQuery = `
+    [out:json];
+    (
+      node["shop"](around:${radius},${lat},${lng});
+      node["amenity"="cafe"](around:${radius},${lat},${lng});
+      node["amenity"="restaurant"](around:${radius},${lat},${lng});
+    );
+    out body;
+  `;
+
+  const queryString = `data=${encodeURIComponent(overpassQuery)}`;
+
+  const response = await axios.post(
+    'https://overpass-api.de/api/interpreter',
+    queryString,
+    {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    }
+  );
+
+  const elements = response.data.elements;
+
+  return elements.map((el: any) => ({
+    id: el.id,
+    name: el.tags?.name || 'Unnamed Place',
+    category: el.tags?.shop || el.tags?.amenity || 'Unknown',
+    lat: el.lat,
+    lng: el.lon,
+    distance: 0, // (optional) you can calculate distance from user later
+  }));
+}
