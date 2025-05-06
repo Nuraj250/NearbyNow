@@ -7,14 +7,6 @@
 
 > Find cafes, parks, shops, and hotspots near you — live on an interactive map. Built with React Leaflet, OpenStreetMap, and Vite.
 
----
-
-## 📸 Demo
-
-> [🚀 Live Demo](https://your-deployment-link.vercel.app) — *(replace this after deploying)*
-
----
-
 ## ✨ Features
 
 - 📍 Get current user location (with fallback)
