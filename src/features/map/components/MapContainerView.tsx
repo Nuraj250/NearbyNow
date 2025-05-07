@@ -6,8 +6,8 @@ import { Loader } from '../../../shared/components/Loader';
 import { useUserLocation } from '../../location/hooks/useUserLocation';
 import { usePlaces } from '../../places/hooks/usePlaces';
 import { PlaceMarker } from './PlaceMarker';
-import { CategoryFilter } from './CategoryFilter';
 import { SearchBar } from './SearchBar';
+// import { CategoryFilter } from './CategoryFilter';
 
 function UserLocationMarker({ lat, lng, accuracy }: { lat: number; lng: number; accuracy: number }) {
   const map = useMap();
@@ -58,8 +58,8 @@ export function MapContainerView() {
   return (
     <div className="relative w-full h-screen">
       {/* Top UI elements */}
-      <SearchBar />
-      <CategoryFilter />
+      {/* <SearchBar /> */}
+      {/* <CategoryFilter /> */}
 
       {/* Map */}
       <MapContainer
