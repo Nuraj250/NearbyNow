@@ -1,5 +1,4 @@
 export interface MapCenter {
-    lat: number;
-    lng: number;
-  }
-  
+  lat: number;
+  lng: number;
+}
