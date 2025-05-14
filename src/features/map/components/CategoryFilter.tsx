@@ -1,9 +1,9 @@
-// import { useState } from 'react';
-// import { usePlacesContext } from '../../places/context/PlacesContext';
+import { useState } from 'react';
+import { usePlacesContext } from '../../places/context/PlacesContext';
 
-// const categories = ['All', 'Cafe', 'Shop', 'Restaurant'];
+const categories = ['All', 'Cafe', 'Shop', 'Restaurant'];
 
-// export function CategoryFilter() {
+export function CategoryFilter() {
 //   const [selected, setSelected] = useState('All');
 //   const { setCategoryFilter } = usePlacesContext();
 
@@ -25,5 +25,5 @@
 //       ))}
 //     </div>
 //   );
-// }
+}
 
